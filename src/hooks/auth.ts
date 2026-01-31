@@ -27,6 +27,7 @@ export default function useAuth() {
     }
 
     router.replace("/");
+    toast.success("Conta criada com sucesso! Faça login para continuar.");
   };
 
   const signIn = async ({
@@ -58,7 +59,20 @@ export default function useAuth() {
     router.replace("/dashboard");
   };
 
-  const signOut = () => {
+  const signOut = async () => {
+    const res = await fetch("/api/auth/signout", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!res.ok) {
+      toast.error(res.statusText || "Erro ao sair. Tente novamente.");
+      return;
+    }
+
+    router.replace("/");
     setUser(null);
   };
 
