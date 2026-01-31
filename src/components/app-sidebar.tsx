@@ -25,7 +25,7 @@ const items = [
     icon: LayoutDashboard,
   },
   {
-    title: "Tasks",
+    title: "Tarefas",
     url: "tasks",
     icon: ListTodo,
   },
@@ -74,7 +74,7 @@ export function AppSidebar() {
                   displayButton={
                     <SidebarMenuButton className="text-red-600 hover:bg-red-50 hover:text-red-700">
                       <LogOut />
-                      <span>Logout</span>
+                      <span>Sair</span>
                     </SidebarMenuButton>
                   }
                   title="Are you sure you want to logout?"
