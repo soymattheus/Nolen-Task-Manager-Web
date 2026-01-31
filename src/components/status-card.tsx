@@ -5,6 +5,7 @@ import {
   CardDescription,
 } from "@/components/ui/card";
 import { STATUS_CONFIG } from "@/config/status-config";
+import { mapStatus } from "../../utils/mapStatus";
 
 export function StatusCard({ label, value }: { label: string; value: number }) {
   const status = STATUS_CONFIG[label as keyof typeof STATUS_CONFIG];
@@ -12,19 +13,6 @@ export function StatusCard({ label, value }: { label: string; value: number }) {
   if (!status) return null;
 
   const Icon = status.icon;
-
-  const mapTitle = (title: string) => {
-    switch (title) {
-      case "C":
-        return "Completa";
-      case "P":
-        return "Pendente";
-      case "E":
-        return "Em Andamento";
-      default:
-        return title;
-    }
-  };
 
   return (
     <Card
@@ -36,7 +24,9 @@ export function StatusCard({ label, value }: { label: string; value: number }) {
       `}
     >
       <CardHeader className="space-y-2">
-        <CardTitle className={status.styles.title}>{mapTitle(label)}</CardTitle>
+        <CardTitle className={status.styles.title}>
+          {mapStatus(label)}
+        </CardTitle>
 
         <div className={`flex items-center gap-2 ${status.styles.description}`}>
           <Icon className="h-5 w-5" />
