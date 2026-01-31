@@ -1,4 +1,4 @@
-export interface UserTasks {
+export interface TaskCounter {
   label: string;
   value: number;
 }
@@ -10,5 +10,5 @@ export interface User {
   status: string;
   email: string;
   password: string;
-  tasks?: UserTasks[];
+  tasks?: TaskCounter[];
 }
