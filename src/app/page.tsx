@@ -12,11 +12,12 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import useAuth from "@/hooks/auth";
+import { Spinner } from "@/components/ui/spinner";
 
 const loginSchema = z.object({
-  email: z.email("Enter a valid email address.."),
-  password: z.string("Enter your password.").min(6, {
-    message: "Enter your password.",
+  email: z.email("Insira um e-mail válido."),
+  password: z.string("Insira a sua senha.").min(6, {
+    message: "O campo senha deve ter ao menos 6 caracteres..",
   }),
 });
 
@@ -44,11 +45,11 @@ export default function Home() {
           <ListCheck />
           Task Manager
         </div>
-        <Button onClick={() => router.push("/register")}>Register</Button>
+        <Button onClick={() => router.push("/register")}>Criar conta</Button>
       </header>
 
       <main className="flex flex-col w-full md:w-2/6 gap-4 justify-center items-center my-auto">
-        <p className="text-3xl font-bold">Login to your account</p>
+        <p className="text-3xl font-bold">Acessar conta</p>
         <form
           className="flex flex-col w-4/5 md:w-full border border-gray-300 gap-3 p-7 rounded-md"
           onSubmit={handleSubmit(onLogin)}
@@ -59,7 +60,7 @@ export default function Home() {
             <Input
               id="fieldgroup-email"
               type="text"
-              placeholder="name@example.com"
+              placeholder="nome@exemplo.com"
               {...register("email")}
             />
             <FieldError>{errors?.email?.message}</FieldError>
@@ -67,12 +68,12 @@ export default function Home() {
 
           {/* Password */}
           <Field data-invalid={errors.password}>
-            <FieldLabel htmlFor="input-button-group">Password</FieldLabel>
+            <FieldLabel htmlFor="input-button-group">Senha</FieldLabel>
             <ButtonGroup className="flex flex-1 w-full h-full outline-0 data-[disabled=true]:bg-[#F0F0F0]">
               <Input
                 type={showPwd ? "text" : "password"}
                 id="input-button-group"
-                placeholder="Password"
+                placeholder="Senha"
                 autoComplete="off"
                 {...register("password")}
               />
@@ -88,18 +89,17 @@ export default function Home() {
           </Field>
 
           <Button disabled={isLoading} type="submit">
-            {isLoading ? "Loading" : "Login"}
+            {isLoading && <Spinner />}
+            Entrar
           </Button>
 
           <div className="flex flex-col md:flex-row w-full justify-between items-center">
-            <p className="font-normal text-[14px]">
-              Don&apos;t have an account yet?
-            </p>
+            <p className="font-normal text-[14px]">Não tem uma conta ainda?</p>
             <Link
               href="/register"
               className="font-bold text-[14px] underline cursor-pointer"
             >
-              Register
+              Criar conta
             </Link>
           </div>
         </form>
