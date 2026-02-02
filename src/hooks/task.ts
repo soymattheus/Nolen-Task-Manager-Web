@@ -1,8 +1,10 @@
+import { useSpinner } from "@/components/spinner";
 import { Task } from "@/types/task";
 import React from "react";
 import { toast } from "sonner";
 
 export default function useTask() {
+  const { setShowSpinner } = useSpinner();
   const [tasks, setTasks] = React.useState<Task[] | null>(null);
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
   const [isError, setIsError] = React.useState<boolean>(false);
@@ -58,6 +60,7 @@ export default function useTask() {
 
   async function handleSave(data: Omit<Task, "id_task" | "id_user">) {
     try {
+      setShowSpinner(true);
       if (editingTask) {
         // UPDATE
         try {
@@ -92,6 +95,9 @@ export default function useTask() {
           setModalOpen(false);
         } catch {
           toast.error("Error interno do servidor.");
+        } finally {
+          setShowSpinner(false);
+          setEditingTask(undefined);
         }
       } else {
         // CREATE
@@ -118,6 +124,9 @@ export default function useTask() {
           setModalOpen(false);
         } catch {
           toast.error("Error interno do servidor.");
+        } finally {
+          setShowSpinner(false);
+          setEditingTask(undefined);
         }
       }
     } catch {
@@ -126,6 +135,7 @@ export default function useTask() {
   }
 
   const deleteTask = async (taskId: string) => {
+    setShowSpinner(true);
     try {
       const res = await fetch(`/api/task/${taskId}`, {
         method: "DELETE",
@@ -146,6 +156,8 @@ export default function useTask() {
       toast.success("Tarefa deletada com sucesso!");
     } catch {
       toast.error("Error interno do servidor.");
+    } finally {
+      setShowSpinner(false);
     }
   };
 

@@ -1,3 +1,4 @@
+import { useSpinner } from "@/components/spinner";
 import { User } from "@/types/user";
 import { useRouter } from "next/navigation";
 import React from "react";
@@ -5,6 +6,7 @@ import { toast } from "sonner";
 
 export default function useAuth() {
   const router = useRouter();
+  const { setShowSpinner } = useSpinner();
   const [user, setUser] = React.useState<User | null>(null);
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
@@ -60,6 +62,7 @@ export default function useAuth() {
   };
 
   const signOut = async () => {
+    setShowSpinner(true);
     const res = await fetch("/api/auth/signout", {
       method: "POST",
       headers: {
@@ -74,6 +77,7 @@ export default function useAuth() {
 
     router.replace("/");
     setUser(null);
+    setShowSpinner(false);
   };
 
   return {
