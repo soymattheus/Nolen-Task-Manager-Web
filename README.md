@@ -113,7 +113,7 @@ https://github.com/soymattheus/Nolen-Task-Manager-API
 
 ---
 
-### 2️⃣ Executar o Frontend
+### 2️⃣ Executar o Frontend em modo de desenvolvimento
 
 1. Clone este repositório:
 
@@ -151,6 +151,51 @@ npm run dev
 ```bash
 http://localhost:3000
 ```
+
+---
+
+### 3️⃣ Executar o Frontend em teste (Docker)
+
+1. Clone este repositório:
+
+```bash
+git clone https://github.com/soymattheus/Nolen-Task-Manager-Web.git
+```
+
+2. Acesse o diretório:
+
+```bash
+cd Nolen-Task-Manager-Web
+```
+
+3. Gerar imagem:
+
+```bash
+$ docker build -t nextjs-app .
+```
+
+4. Executar imagem em container:
+
+```bash
+$ docker run -p 3000:3000 nextjs-app
+```
+
+5. Mapear host manualmente:
+
+```bash
+$ docker run \
+  --add-host=host.docker.internal:host-gateway \
+  -p 3000:3000 \
+  nextjs-app
+```
+
+6. Aplicação estará disponível em:
+
+```bash
+http://localhost:3000
+```
+
+---
 
 ## 🔌 Integração com Backend
 

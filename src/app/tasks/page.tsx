@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { toast } from "sonner";
 
 import { TaskCard } from "./cardTask";
 import { TaskModal } from "./taskModal";
@@ -16,7 +15,6 @@ import { STATUS_STYLES } from "@/config/status-config";
 import TasksSkeleton from "./loading";
 import useTask from "@/hooks/task";
 import { mapStatus } from "../../../utils/mapStatus";
-import { ConfirmModal } from "@/components/modal-confirm";
 
 const statuses: TaskStatus[] = ["P", "E", "C"];
 
