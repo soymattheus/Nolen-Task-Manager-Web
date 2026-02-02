@@ -8,6 +8,7 @@ export default function useTask() {
   const [isError, setIsError] = React.useState<boolean>(false);
   const [isSuccess, setIsSuccess] = React.useState<boolean>(false);
   const [editingTask, setEditingTask] = React.useState<Task>();
+  const [modalOpen, setModalOpen] = React.useState(false);
 
   const getData = async ({
     page = "",
@@ -88,6 +89,7 @@ export default function useTask() {
             }) || null,
           );
           toast.success("Tarefa atualizada com sucesso!");
+          setModalOpen(false);
         } catch {
           toast.error("Error interno do servidor.");
         }
@@ -113,6 +115,7 @@ export default function useTask() {
 
           setTasks([...(tasks || []), task?.task]);
           toast.success("Tarefa criada com sucesso!");
+          setModalOpen(false);
         } catch {
           toast.error("Error interno do servidor.");
         }
@@ -156,5 +159,7 @@ export default function useTask() {
     editingTask,
     setEditingTask,
     deleteTask,
+    modalOpen,
+    setModalOpen,
   };
 }

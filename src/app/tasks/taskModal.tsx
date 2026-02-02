@@ -72,7 +72,6 @@ export function TaskModal({
       ...payload,
       status: payload.status as TaskStatus,
     });
-    onOpenChange(false);
   }
 
   return (

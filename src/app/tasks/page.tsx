@@ -28,8 +28,9 @@ export default function Tasks() {
     editingTask,
     setEditingTask,
     deleteTask,
+    modalOpen,
+    setModalOpen,
   } = useTask();
-  const [modalOpen, setModalOpen] = React.useState(false);
 
   if (isLoading) return <TasksSkeleton />;
 
